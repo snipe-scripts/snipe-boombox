@@ -6,6 +6,7 @@
 Config = {}
 
 Config.Framework = 'qb' -- esx
+Config.PlayerLoadedEvent = 'QBCore:Client:OnPlayerLoaded' -- esx:playerLoaded
 
 
 -- You can add as many types of boomboxes you want with different props and different distances

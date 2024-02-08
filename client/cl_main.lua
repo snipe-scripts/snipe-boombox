@@ -14,6 +14,13 @@ function ShowNotification(text, type)
     lib.notify({description = text, type = type})
 end
 
+RegisterNetEvent(Config.PlayerLoadedEvent, function()
+    Wait(1000)
+    tabledata = lib.callback.await('snipe-boombox:server:getTables', false)
+    BoomboxTable = tabledata
+    isSpawned = true
+end)
+
 AddEventHandler('onResourceStop', function(resource)
 	if ("snipe-boombox" ~= resource) then return end
 	if BoomboxTable then
