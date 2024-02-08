@@ -17,7 +17,6 @@ Citizen.CreateThread(function()
 end)
 
 lib.callback.register('snipe-boombox:server:getTables', function(source)
-    local src = source
     return BoomboxTable
 end)
 
