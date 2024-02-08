@@ -2,12 +2,11 @@
 --------------- https://discord.gg/AeCVP2F8h7  -------------
 ---------------------------------------------------------------
 
+local props = {}
+for k, v in pairs(ItemTable) do
+    table.insert(props, v.prop)
+end
 
-local props = {
-	'prop_boombox_01',
-}
-
-local sounds = {}
 CreateThread(function()
         exports["qb-target"]:AddTargetModel(props, {
             options = {
