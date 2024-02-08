@@ -1,4 +1,7 @@
-QBCore = nil
+-----------------For support, scripts, and more----------------
+--------------- https://discord.gg/AeCVP2F8h7  -------------
+---------------------------------------------------------------
+
 isSelecting = nil
 isPlacing = false
 BoomboxTable = {}
@@ -6,8 +9,6 @@ local obj = nil
 local heading = 0.0
 local isSpawned = true
 local currentCoords = nil
-
-
 
 function ShowNotification(text, type)
     lib.notify({description = text, type = type})
@@ -198,14 +199,6 @@ function stopPlacing()
     DeleteObject(obj)
     obj = nil
 end
-
-function loadAnimDict(dict)
-    while (not HasAnimDictLoaded(dict)) do
-        RequestAnimDict(dict)
-        Citizen.Wait(5)
-    end
-end
-
 
 RegisterNetEvent('snipe-boombox:client:deleteContainer', function(boomboxId, action)
 	if BoomboxTable[boomboxId] then

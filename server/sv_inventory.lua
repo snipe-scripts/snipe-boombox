@@ -1,3 +1,6 @@
+-----------------For support, scripts, and more----------------
+--------------- https://discord.gg/AeCVP2F8h7  -------------
+---------------------------------------------------------------
 
 if Config.Framework == "qb" then
     QBCore = exports["qb-core"]:GetCoreObject()

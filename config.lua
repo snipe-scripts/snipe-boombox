@@ -1,3 +1,8 @@
+
+-----------------For support, scripts, and more----------------
+--------------- https://discord.gg/AeCVP2F8h7  -------------
+---------------------------------------------------------------
+
 Config = {}
 
 Config.Framework = 'qb' -- esx
