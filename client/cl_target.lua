@@ -101,7 +101,6 @@ RegisterNetEvent("snipe-boombox:client:playMusic", function(objectData)
 end)
 
 function PlayMusic(objectData)
-    print(json.encode(objectData))
     local input = lib.inputDialog('Dialog title', {
         {type = 'input', label = 'Song URL', description = 'Youtube Link Only', required = true},
     })
