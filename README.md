@@ -1,6 +1,11 @@
 # Discord : https://discord.gg/AeCVP2F8h7
 # Store : https://snipe.tebex.io
 
+# Dependency
+- ox_lib [https://github.com/overextended/ox_lib]
+- xsound [https://github.com/Xogy/xsound]
+
+# Installation
 
 1. Add the following items to your shared.lua/items.lua depending if using qbcore 
 
