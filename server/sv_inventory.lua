@@ -74,7 +74,7 @@ CreateThread(function()
             QBCore.Functions.CreateUseableItem(k, function(source, item)
                 local src = source
                 local prop = v.prop
-                TriggerClientEvent('snipe-boombox:client:PlaceTable', src, 1, prop, k)
+                TriggerClientEvent('snipe-boombox:client:PlaceBoombox', src, 1, prop, k)
             end)
         end
         
@@ -83,7 +83,7 @@ CreateThread(function()
             ESX.RegisterUsableItem(k, function(source)
                 local src = source
                 local prop = v.prop
-                TriggerClientEvent('snipe-boombox:client:PlaceTable', src, 1, prop, k)
+                TriggerClientEvent('snipe-boombox:client:PlaceBoombox', src, 1, prop, k)
             end)
         end
     end

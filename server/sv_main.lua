@@ -42,7 +42,7 @@ local function getuuid()
     end)
 end
 
-RegisterServerEvent('snipe-boombox:server:addNewBoombox', function(loc, model, type, quality, containerName, itemName, heading)
+RegisterServerEvent('snipe-boombox:server:addNewBoombox', function(loc, model, itemName, heading)
     local source = source
     if RemoveItem(source, itemName, 1) then
         local tableInfo = {}
@@ -66,13 +66,13 @@ RegisterServerEvent('snipe-boombox:server:pickup', function(id, coords, item)
             if BoomboxTable[id].coords == coords then
                 table.remove(BoomboxTable, id)
                 StoreBoomboxTable()
-                TriggerClientEvent('snipe-boombox:client:deleteContainer', -1, id, action)
+                TriggerClientEvent('snipe-boombox:client:deleteBoombox', -1, id, action)
             else
                 for k,v in ipairs(BoomboxTable) do
                     if v.coords == coords then
                         table.remove(BoomboxTable,k)
                         StoreBoomboxTable()
-                        TriggerClientEvent('snipe-boombox:client:deleteContainer', -1, k, action)
+                        TriggerClientEvent('snipe-boombox:client:deleteBoombox', -1, k, action)
                         return
                     end
                 end

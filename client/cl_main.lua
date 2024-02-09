@@ -73,12 +73,11 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNetEvent("snipe-boombox:client:PlaceTable", function(type,object, itemName)
+RegisterNetEvent("snipe-boombox:client:PlaceBoombox", function(type,object, itemName)
     if obj == nil then
         local playerPed = PlayerPedId()
         isSelecting = object
         obj = CreateObject(GetHashKey(object), GetEntityCoords(playerPed), 0, 0, 0)
-        -- SetEntityHeading(obj, 0)
         SetEntityAlpha(obj, 100)
         ShowNotification("Press E to place, Backspace to Cancel", "success")
         CreateThread(function ()
@@ -104,7 +103,7 @@ RegisterNetEvent("snipe-boombox:client:PlaceTable", function(type,object, itemNa
                 end
                 if IsControlJustPressed(0, 38) then
                     if #(GetEntityCoords(PlayerPedId()) - currentCoords) < 5.0 then
-                        TriggerEvent("snipe-boombox:client:putTable", object, currentCoords, heading, containerName, type, itemName)
+                        PutBoombox(object, currentCoords, heading, type, itemName)
                     else
                         ShowNotification("Too far", "error")
                     end
@@ -123,7 +122,7 @@ RegisterNetEvent("snipe-boombox:client:PlaceTable", function(type,object, itemNa
     end
 end)
 
-RegisterNetEvent("snipe-boombox:client:putTable", function(model, coords, heading, containerName, type, itemName)
+function PutBoombox(model, coords, heading, type, itemName)
     RequestModel(GetHashKey(model))
     CreatedObjects = CreateObject(GetHashKey(model), coords, true, false, false)
     SetEntityAlpha(CreatedObjects, 51)
@@ -139,22 +138,22 @@ RegisterNetEvent("snipe-boombox:client:putTable", function(model, coords, headin
     isPlacing = false
     if canPlace then
         DeleteObject(CreatedObjects)
-        TriggerServerEvent("snipe-boombox:server:addNewBoombox", coords, model, type, 100, containerName, itemName, heading)
+        TriggerServerEvent("snipe-boombox:server:addNewBoombox", coords, model, itemName, heading)
     end
-end)
+end
 
 RegisterNetEvent('snipe-boombox:client:addNewBoombox', function(data)
-	local container = data
+	local boombox = data
 	if #(GetEntityCoords(PlayerPedId()) - data.coords)<= 150.0 then
 		local obj = CreateObject(GetHashKey(data.model), data.coords.x, data.coords.y, data.coords.z, false)
         if data.heading ~= nil then
             SetEntityHeading(obj, data.heading)
         end
         FreezeEntityPosition(obj, true)
-        container.obj = obj
+        boombox.obj = obj
 	end
     
-    BoomboxTable[#BoomboxTable + 1] = container
+    BoomboxTable[#BoomboxTable + 1] = boombox
 end)
 
 function camPosition (ignore)
@@ -186,11 +185,11 @@ function camPosition (ignore)
         ignore,
         4
     );
-    return GetShapeTestResultIncludingMaterial(sphereCast);
+    return GetShapeTestResult(sphereCast);
 end
 
 function placing()
-    local _, hit, endCoords, _, _, _ = camPosition(obj)
+    local _, hit, endCoords, _, _ = camPosition(obj)
     if hit then
         currentCoords = endCoords
     end
@@ -209,7 +208,7 @@ function stopPlacing()
     obj = nil
 end
 
-RegisterNetEvent('snipe-boombox:client:deleteContainer', function(boomboxId, action)
+RegisterNetEvent('snipe-boombox:client:deleteBoombox', function(boomboxId, action)
 	if BoomboxTable[boomboxId] then
 		DeleteEntity(BoomboxTable[boomboxId].obj)
         table.remove(BoomboxTable, boomboxId)

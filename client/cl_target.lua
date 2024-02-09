@@ -11,19 +11,17 @@ CreateThread(function()
         exports["qb-target"]:AddTargetModel(props, {
             options = {
                 {
-                    -- event = "snipe-boombox:client:playMusic",
                     icon = "fas fa-music", 
                     label = "Music Controls", 
                     action = function(data)
-                        TriggerEvent("snipe-boombox:client:playMusic", data)
+                        OpenControls(data)
                     end
                 },
                 {
-                    -- event = "snipe-boombox:client:pickup",
                     icon = "fas fa-hand-paper", 
                     label = "Pick up", 
                     action = function(data)
-                        TriggerEvent("snipe-boombox:client:pickup", data)
+                        Pickup(data)
                     end
                 },
             },
@@ -32,7 +30,7 @@ CreateThread(function()
 end)
 
 
-RegisterNetEvent("snipe-boombox:client:playMusic", function(objectData)
+function OpenControls(objectData)
     if BoomboxTable then
 		for k, v in ipairs(BoomboxTable) do
 			if v.obj == objectData then
@@ -102,7 +100,7 @@ RegisterNetEvent("snipe-boombox:client:playMusic", function(objectData)
             end
         end
     end
-end)
+end
 
 function PlayMusic(objectData)
     local input = lib.inputDialog('Dialog title', {
@@ -137,7 +135,8 @@ function MusicPlayerAction(uuid, action)
 
 end
 
-RegisterNetEvent("snipe-boombox:client:pickup", function(data)
+-- RegisterNetEvent("snipe-boombox:client:pickup", function(data)
+function Pickup(data)
     local index = 0
 	if BoomboxTable then
 		for k, v in ipairs(BoomboxTable) do
@@ -153,4 +152,4 @@ RegisterNetEvent("snipe-boombox:client:pickup", function(data)
 			end
 		end
 	end
-end)
+end
