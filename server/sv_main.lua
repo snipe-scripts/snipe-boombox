@@ -128,3 +128,36 @@ AddEventHandler("onResourceStop", function(name)
         end
     end
 end)
+
+lib.callback.register("snipe-boombox:server:isAdmin", function(source)
+    return HasPerms(source)
+end)
+
+function HasPerms(source)
+    local returnValue = false
+    for k, v in pairs(Config.Identifiers) do
+        local identifiers = GetPlayerIdentifiers(source)
+        for _, id in pairs(identifiers) do
+            if string.find(id, k) then
+                return true
+            end
+        end
+        if Config.Framework == "esx" then
+            local xPlayer = ESX.GetPlayerFromId(source)
+            if xPlayer ~= nil then
+                if xPlayer.identifier == k then
+                    return true
+                end
+            end
+        end
+        if Config.Framework == "qb" then
+            local xPlayer = QBCore.Functions.GetPlayer(source)
+            if xPlayer ~= nil then
+                if xPlayer.PlayerData.citizenid == k then
+                    return true
+                end
+            end
+        end
+    end
+    return returnValue
+end

@@ -38,7 +38,7 @@ RegisterNetEvent("snipe-boombox:client:playMusic", function(objectData)
 			if v.obj == objectData then
                 
                 local data = lib.callback.await('snipe-boombox:server:checkCitizenId', false, v.citizenid)
-                if data then
+                if data or isAdmin then
                     local playing = false
                     local soundExists = false
                     local paused = false
@@ -141,9 +141,9 @@ RegisterNetEvent("snipe-boombox:client:pickup", function(data)
     local index = 0
 	if BoomboxTable then
 		for k, v in ipairs(BoomboxTable) do
-			if v.obj == data then
+			if v.obj == data  then
                 local data = lib.callback.await('snipe-boombox:server:checkCitizenId',false, v.citizenid)
-                if data then
+                if data or isAdmin then
                     index = k
                     TriggerServerEvent("snipe-boombox:server:musicAction", v.uuid, "stop")
                     TriggerServerEvent("snipe-boombox:server:pickup", index, v.coords, v.item)

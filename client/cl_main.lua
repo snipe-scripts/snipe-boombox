@@ -9,6 +9,7 @@ local obj = nil
 local heading = 0.0
 local isSpawned = true
 local currentCoords = nil
+isAdmin = false
 
 function ShowNotification(text, type)
     lib.notify({description = text, type = type})
@@ -17,6 +18,7 @@ end
 RegisterNetEvent(Config.PlayerLoadedEvent, function()
     Wait(1000)
     tabledata = lib.callback.await('snipe-boombox:server:getTables', false)
+    isAdmin = lib.callback.await('snipe-boombox:server:isAdmin', false)
     BoomboxTable = tabledata
     isSpawned = true
 end)
