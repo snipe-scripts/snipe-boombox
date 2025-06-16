@@ -61,24 +61,26 @@ end)
 
 RegisterServerEvent('snipe-boombox:server:pickup', function(id, coords, item)
     local source = source
-    if AddItem(source, item, 1) then
-        if BoomboxTable[id] then
-            if BoomboxTable[id].coords == coords then
-                table.remove(BoomboxTable, id)
-                StoreBoomboxTable()
-                TriggerClientEvent('snipe-boombox:client:deleteBoombox', -1, id, action)
-            else
-                for k,v in ipairs(BoomboxTable) do
-                    if v.coords == coords then
-                        table.remove(BoomboxTable,k)
-                        StoreBoomboxTable()
-                        TriggerClientEvent('snipe-boombox:client:deleteBoombox', -1, k, action)
-                        return
-                    end
+
+    if BoomboxTable[id] then
+        if BoomboxTable[id].coords == coords then
+            table.remove(BoomboxTable, id)
+            StoreBoomboxTable()
+            AddItem(source, item, 1)
+            TriggerClientEvent('snipe-boombox:client:deleteBoombox', -1, id, action)
+        else
+            for k,v in ipairs(BoomboxTable) do
+                if v.coords == coords then
+                    table.remove(BoomboxTable,k)
+                    StoreBoomboxTable()
+                    AddItem(source, item, 1)
+                    TriggerClientEvent('snipe-boombox:client:deleteBoombox', -1, k, action)
+                    return
                 end
             end
         end
     end
+    
 end)
 
 
